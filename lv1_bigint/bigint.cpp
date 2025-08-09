@@ -60,6 +60,17 @@ bigint& bigint::operator+=(const bigint& rhs) {
     return *this;
 }
 
+bigint& bigint::operator++() {
+    *this += bigint(1);
+    return *this;
+}
+
+bigint bigint::operator++(int) {
+    bigint ret(*this);
+    ++(*this);
+    return ret;
+}
+
 bigint bigint::operator<<(const unsigned int shift) const {
     if (this->digit == "0")
         return bigint(0);

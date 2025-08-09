@@ -13,6 +13,8 @@ class bigint {
     const std::string& get_digit() const;
     bigint operator+(const bigint& rhs) const;
     bigint& operator+=(const bigint& rhs);
+    bigint& operator++();
+    bigint operator++(int);
     bigint operator<<(const unsigned int shift) const;
     bigint& operator<<=(const unsigned int shift);
     bigint operator>>(const unsigned int shift) const;
