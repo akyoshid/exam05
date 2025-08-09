@@ -11,10 +11,17 @@ class bigint {
     bigint& operator=(const bigint& src);
     ~bigint();
     const std::string& get_digit() const;
+    bigint operator+(const bigint& rhs) const;
+    bigint& operator+=(const bigint& rhs);
+    bigint operator<<(const unsigned int shift) const;
+    bigint& operator<<=(const unsigned int shift);
+    bigint operator>>(const unsigned int shift) const;
+    bigint& operator>>=(const unsigned int shift);
  private:
+    bigint(const std::string& digit);
     std::string digit;
 };
 
-std::ostream& operator<<(std::ostream& lhs, bigint& rhs);
+std::ostream& operator<<(std::ostream& lhs, const bigint& rhs);
 
 #endif
