@@ -19,6 +19,12 @@ class bigint {
     bigint& operator<<=(const unsigned int shift);
     bigint operator>>(const unsigned int shift) const;
     bigint& operator>>=(const unsigned int shift);
+    bool operator==(const bigint& rhs) const;
+    bool operator!=(const bigint& rhs) const;
+    bool operator<(const bigint& rhs) const;
+    bool operator<=(const bigint& rhs) const;
+    bool operator>(const bigint& rhs) const;
+    bool operator>=(const bigint& rhs) const;
  private:
     bigint(const std::string& digit);
     std::string digit;

@@ -101,30 +101,31 @@ bigint& bigint::operator>>=(const unsigned int shift) {
     return *this;
 }
 
-#include <climits>
+bool bigint::operator==(const bigint& rhs) const {
+    return this->digit == rhs.digit;
+}
 
-int main() {
-    bigint a(ULONG_MAX);
-    bigint b(999);
-    bigint c(0);
-    std::cout << a << std::endl;
-    std::cout << a + bigint(1) << std::endl;
-    std::cout << b << std::endl;
-    b += b;
-    std::cout << b << std::endl;
-    std::cout << c << std::endl;
-    c += c;
-    std::cout << c << std::endl;
-    std::cout << (a << 1) << std::endl;
-    a <<= 3;
-    std::cout << a << std::endl;
-    std::cout << (a << 0) << std::endl;
-    std::cout << (c << 1) << std::endl;
-    std::cout << (a >> 1) << std::endl;
-    a >>= 3;
-    std::cout << a << std::endl;
-    std::cout << (a >> 0) << std::endl;
-    std::cout << (a >> 100) << std::endl;
-    std::cout << (c >> 1) << std::endl;
-    return 0;
+bool bigint::operator!=(const bigint& rhs) const {
+    return !(*this == rhs);
+}
+
+bool bigint::operator<(const bigint& rhs) const {
+    size_t l_len = this->digit.length();
+    size_t r_len = rhs.digit.length();
+    if (l_len == r_len)
+        return this->digit < rhs.digit;
+    else
+        return l_len < r_len;
+}
+
+bool bigint::operator<=(const bigint& rhs) const {
+    return !(*this > rhs);
+}
+
+bool bigint::operator>(const bigint& rhs) const {
+    return rhs < *this;
+}
+
+bool bigint::operator>=(const bigint& rhs) const {
+    return !(*this < rhs);
 }
