@@ -18,11 +18,19 @@ class vect2 {
     vect2 operator++(int);
     vect2& operator--();
     vect2 operator--(int);
+    vect2 operator+(const vect2& rhs) const;
+    vect2& operator+=(const vect2& rhs);
+    vect2 operator-(const vect2& rhs) const;
+    vect2& operator-=(const vect2& rhs);
+    vect2 operator*(const int rhs) const;
+    vect2& operator*=(const int rhs);
+    vect2 operator-() const;
  private:
     int x;
     int y;
 };
 
 std::ostream& operator<<(std::ostream& lhs, const vect2& rhs);
+vect2 operator*(const int lhs, const vect2& rhs);
 
 #endif

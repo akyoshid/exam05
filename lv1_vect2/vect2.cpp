@@ -68,6 +68,56 @@ vect2 vect2::operator--(int) {
     return ret;
 }
 
+vect2 vect2::operator+(const vect2& rhs) const {
+    vect2 ret(*this);
+    ret.x += rhs.x;
+    ret.y += rhs.y;
+    return ret;
+}
+
+vect2& vect2::operator+=(const vect2& rhs) {
+    this->x += rhs.x;
+    this->y += rhs.y;
+    return *this;
+}
+
+vect2 vect2::operator-(const vect2& rhs) const {
+    vect2 ret(*this);
+    ret.x -= rhs.x;
+    ret.y -= rhs.y;
+    return ret;
+}
+
+vect2& vect2::operator-=(const vect2& rhs) {
+    this->x -= rhs.x;
+    this->y -= rhs.y;
+    return *this;
+}
+
+vect2 vect2::operator*(const int rhs) const {
+    vect2 ret(*this);
+    ret.x *= rhs;
+    ret.y *= rhs;
+    return ret;
+}
+
+vect2& vect2::operator*=(const int rhs) {
+    this->x *= rhs;
+    this->y *= rhs;
+    return *this;
+}
+
+vect2 vect2::operator-() const {
+    vect2 ret(*this);
+    ret.x *= -1;
+    ret.y *= -1;
+    return ret;
+}
+
+vect2 operator*(const int lhs, const vect2& rhs) {
+    return vect2(lhs * rhs.get_x(), lhs * rhs.get_y());
+}
+
 std::ostream& operator<<(std::ostream& lhs, const vect2& rhs) {
     lhs << rhs.get_x() << "," << rhs.get_y();
     return lhs;
