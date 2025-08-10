@@ -114,6 +114,17 @@ vect2 vect2::operator-() const {
     return ret;
 }
 
+bool vect2::operator==(const vect2& rhs) const {
+    if (this->x == rhs.x && this->y == rhs.y)
+        return true;
+    else
+        return false;
+}
+
+bool vect2::operator!=(const vect2& rhs) const {
+    return !(*this == rhs);
+}
+
 vect2 operator*(const int lhs, const vect2& rhs) {
     return vect2(lhs * rhs.get_x(), lhs * rhs.get_y());
 }

@@ -25,6 +25,8 @@ class vect2 {
     vect2 operator*(const int rhs) const;
     vect2& operator*=(const int rhs);
     vect2 operator-() const;
+    bool operator==(const vect2& rhs) const;
+    bool operator!=(const vect2& rhs) const;
  private:
     int x;
     int y;
