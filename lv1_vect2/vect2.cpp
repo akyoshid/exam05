@@ -28,6 +28,46 @@ int vect2::get_y() const {
     return (y);
 }
 
+int& vect2::operator[](const int index) {
+    if (index == 0)
+        return this->x;
+    else
+        return this->y;
+}
+
+const int& vect2::operator[](const int index) const {
+    if (index == 0)
+        return this->x;
+    else
+        return this->y;
+}
+
+vect2& vect2::operator++() {
+    ++(this->x);
+    ++(this->y);
+    return *this;
+}
+
+vect2 vect2::operator++(int) {
+    vect2 ret(*this);
+    ++(this->x);
+    ++(this->y);
+    return ret;
+}
+
+vect2& vect2::operator--() {
+    --(this->x);
+    --(this->y);
+    return *this;
+}
+
+vect2 vect2::operator--(int) {
+    vect2 ret(*this);
+    --(this->x);
+    --(this->y);
+    return ret;
+}
+
 std::ostream& operator<<(std::ostream& lhs, const vect2& rhs) {
     lhs << rhs.get_x() << "," << rhs.get_y();
     return lhs;
