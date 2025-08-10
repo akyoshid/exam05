@@ -130,6 +130,6 @@ vect2 operator*(const int lhs, const vect2& rhs) {
 }
 
 std::ostream& operator<<(std::ostream& lhs, const vect2& rhs) {
-    lhs << rhs.get_x() << "," << rhs.get_y();
+    lhs << "{" << rhs.get_x() << ", " << rhs.get_y() << "}";
     return lhs;
 }
