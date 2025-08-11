@@ -27,27 +27,27 @@ Once end of file is reached, your program must simulate a game of life on this
 
 Example:
 $> echo 'sdxddssaaww' | ./a.out 5 5 0 | cat -e
-$
-OOO $
-O O $
-OOO $
-$
-$> echo 'sdxssdswdxddddsxaadwxwdxwaa' | ./a.out 10 6 0 | cat -e
-$
-O OOO $
-O O $
-OOO O $
-O OOO $
-$
+     $
+ 000 $
+ 0 0 $
+ 000 $
+     $
+$> echo 'sdxssdswdxdddxsaddawxwdxwaa' | ./a.out 10 6 0 | cat -e
+          $
+ 0   000  $
+ 0     0  $
+ 000  0   $
+  0  000  $
+          $
 $> echo 'dxss' | ./a.out 3 3 0 | cat -e
-O $
-O $
-O $
+ 0 $
+ 0 $
+ 0 $
 $> echo 'dxss' | ./a.out 3 3 1 | cat -e
-$
-OOO$
-$
+   $
+000$
+   $
 $> echo 'dxss' | ./a.out 3 3 2 | cat -e
-O $
-O $
-O $
+ 0 $
+ 0 $
+ 0 $ 
