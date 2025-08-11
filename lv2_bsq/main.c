@@ -28,7 +28,7 @@ FILE* get_fstream(char *filename) {
 
 // Success -> return 1
 // Failure -> return 0
-int ft_isspace(int c) {
+int ft_isprint(int c) {
     if (c >= 32 && c <= 126)
         return 1;
     else
