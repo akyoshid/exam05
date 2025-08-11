@@ -68,5 +68,13 @@ int main(int argc, char **argv) {
     test_s.get_bag().print();
   }
 
+  set sa_dup(sa);
+  set st_dup(st);
+  sa_dup = sa;
+  st_dup = st;
+
+  delete t;
+  delete a;
+
   return 0;
 } 
