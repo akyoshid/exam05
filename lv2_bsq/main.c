@@ -116,6 +116,7 @@ int read_map(FILE *f, t_data *d) {
         free_map(d);
         return -1;
     }
+    free(temp);
     return 0;
 }
 
