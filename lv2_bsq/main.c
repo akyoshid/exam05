@@ -39,9 +39,9 @@ int ft_isprint(int c) {
 // Failure -> return 0
 int is_1st_line_valid(t_data *d) {
     if (d->row <= 0
-        || ft_isspace(d->empty) == 0
-        || ft_isspace(d->obstacle) == 0
-        || ft_isspace(d->full) == 0
+        || ft_isprint(d->empty) == 0
+        || ft_isprint(d->obstacle) == 0
+        || ft_isprint(d->full) == 0
         || d->empty == d->obstacle
         || d->obstacle == d->full
         || d->full == d->empty)
