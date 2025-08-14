@@ -1,12 +1,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct s_data {
     int width;
     int height;
     int iterations;
     char *command;
+    char **map;
 } t_data;
 
 void ft_putstr(char *s) {
@@ -71,19 +73,88 @@ int get_command(t_data *d) {
     }
 }
 
+int alloc_map(t_data *d) {
+    d->map = calloc(d->height + 1, sizeof(char *));
+    if (d->map == NULL) {
+        ft_putstr("Error\ncalloc: failed to allocate memory\n");
+        return -1;
+    }
+    for (int i = 0; i < d->height; ++i) {
+        d->map[i] = calloc(d->width + 1, sizeof(char));
+        if (d->map[i] == NULL) {
+            ft_putstr("Error\ncalloc: failed to allocate memory\n");
+            for (int j = 0; j < i; ++j)
+                free(d->map[j]);
+            free(d->map);
+            return -1;
+        }
+        for (int j = 0; j < d->width; ++j)
+            d->map[i][j] = ' ';
+    }
+    return 0;
+}
+
+void initialize_map(t_data *d) {
+    bool write_mode = false;
+    int y_pos = 0;
+    int x_pos = 0;
+    for (int i = 0; d->command[i] != '\0'; ++i) {
+        if (d->command[i] == 'x') {
+            if (write_mode == false)
+                write_mode = true;
+            else
+                write_mode = false;
+        } else if (d->command[i] == 'w' && y_pos > 0) {
+            y_pos--;
+        } else if (d->command[i] == 'a' && x_pos > 0) {
+            x_pos--;
+        } else if (d->command[i] == 's' && y_pos < d->height - 1) {
+            y_pos++;
+        } else if (d->command[i] == 'd' && x_pos < d->width - 1) {
+            x_pos++;
+        }
+        if (write_mode == true)
+            d->map[y_pos][x_pos] = '0';
+    }
+    free(d->command);
+}
+
+void print_map(t_data *d) {
+    for (int i = 0; i < d->height; ++i) {
+        ft_putstr(d->map[i]);
+        putchar('\n');
+    }
+}
+
+void free_map(t_data *d) {
+    for (int i = 0; i < d->height; ++i)
+        free(d->map[i]);
+    free(d->map);
+}
+
+int execute_command(t_data *d) {
+    if (alloc_map(d) == -1) {
+        free(d->command);
+        return -1;
+    }
+    initialize_map(d);
+    //
+    print_map(d);
+    //
+    free_map(d);
+    return 0;
+}
+
+
 int main(int argc, char *argv[]) {
-    t_data d = {0, 0, 0, NULL};
+    t_data d = {0, 0, 0, NULL, NULL};
     if (check_args(argc, argv, &d) == -1)
         return 1;
     if (get_command(&d) == -1)
         return 1;
-
-    //
-    ft_putstr(d.command);
-    ft_putstr("\n");
-    free(d.command);
-
-    //
-
+    // ft_putstr(d.command);
+    // ft_putstr("\n");
+    if (execute_command(&d) == -1)
+        return 1;
     return 0;
 }
