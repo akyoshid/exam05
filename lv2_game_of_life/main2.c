@@ -145,6 +145,57 @@ int init_map(t_data *d) {
     return 0;
 }
 
+bool can_survive(t_data *d, int i, int j) {
+    int alive_neighbor = 0;
+
+    if (i > 0) {
+        if (j > 0 && d->map[i - 1][j - 1] == '0')
+            alive_neighbor++;
+        if (d->map[i - 1][j] == '0')
+            alive_neighbor++;
+        if (j < d->width - 1 && d->map[i - 1][j + 1] == '0')
+            alive_neighbor++;
+    }
+
+    if (j > 0 && d->map[i][j - 1] == '0')
+        alive_neighbor++;
+    if (j < d->width - 1 && d->map[i][j + 1] == '0')
+        alive_neighbor++;
+
+    if (i < d->height - 1) {
+        if (j > 0 && d->map[i + 1][j - 1] == '0')
+            alive_neighbor++;
+        if (d->map[i + 1][j] == '0')
+            alive_neighbor++;
+        if (j < d->width - 1 && d->map[i + 1][j + 1] == '0')
+            alive_neighbor++;
+    }
+
+    if (d->map[i][j] == '0') {
+        if (alive_neighbor == 2 || alive_neighbor == 3)
+            return true;
+    } else {
+        if (alive_neighbor == 3)
+            return true;
+    }
+    return false;
+}
+
+int simulate_life(t_data *d) {
+    char **new_map = alloc_map(d);
+    if (new_map == NULL)
+        return -1;
+    for (int i = 0; i < d->height; ++i) {
+        for (int j = 0; j < d->width; ++j) {
+            if (can_survive(d, i, j) == true)
+                new_map[i][j] = '0';
+        }
+    }
+    free_map(d);
+    d->map = new_map;
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     t_data d = {0, 0, 0, NULL, NULL};
     if (check_args(argc, argv, &d) == -1)
@@ -153,9 +204,13 @@ int main(int argc, char *argv[]) {
         return 1;
     if (init_map(&d) == -1)
         return 1;
-    //
+    for (int i = 0; i < d.iterations; ++i) {
+        if (simulate_life(&d) == -1) {
+            free_map(&d);
+            return 1;
+        }
+    }
     print_map(&d);
     free_map(&d);
-    //
     return 0;
 }
