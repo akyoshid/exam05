@@ -84,7 +84,7 @@ char **alloc_map(t_data *d) {
         tmp[i] = calloc(d->width + 1, sizeof(char));
         if (tmp[i] == NULL) {
             ft_putstr("Error\ncalloc: failed to allocate memory\n");
-            for (int j = 0; i < j; ++j)
+            for (int j = 0; j < i; ++j)
                 free(tmp[j]);
             free(tmp);
             return NULL;
