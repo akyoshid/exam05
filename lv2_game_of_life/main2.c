@@ -8,6 +8,7 @@ typedef struct s_data {
     int height;
     int iterations;
     char *command;
+    char **map;
 } t_data;
 
 void ft_putstr(char *s) {
@@ -71,17 +72,90 @@ int get_command(t_data *d) {
     }
 }
 
+// Success: return a pointer to allocated memory
+// Failure: return NULL
+char **alloc_map(t_data *d) {
+    char **tmp = calloc(d->height + 1, sizeof(char *));
+    if (tmp == NULL) {
+        ft_putstr("Error\ncalloc: failed to allocate memory\n");
+        return NULL;
+    }
+    for (int i = 0; i < d->height; ++i) {
+        tmp[i] = calloc(d->width + 1, sizeof(char));
+        if (tmp[i] == NULL) {
+            ft_putstr("Error\ncalloc: failed to allocate memory\n");
+            for (int j = 0; i < j; ++j)
+                free(tmp[j]);
+            free(tmp);
+            return NULL;
+        }
+        for (int j = 0; j < d->width; ++j)
+            tmp[i][j] = ' ';
+    }
+    return tmp;
+}
+
+void free_map(t_data *d) {
+    for (int i = 0; i < d->height; ++i)
+        free(d->map[i]);
+    free(d->map);
+}
+
+void print_map(t_data *d) {
+    for (int i = 0; i < d->height; ++i) {
+        ft_putstr(d->map[i]);
+        putchar('\n');
+    }
+}
+
+void exec_command(t_data *d) {
+    int y = 0;
+    int x = 0;
+    bool write_mode = false;
+    for (int i = 0; d->command[i] != '\0'; ++i) {
+        if (d->command[i] == 'x') {
+            if (write_mode == true)
+                write_mode = false;
+            else
+                write_mode = true;
+        } else if (d->command[i] == 'w' && y > 0) {
+            y--;
+        } else if (d->command[i] == 'a' && x > 0) {
+            x--;
+        } else if (d->command[i] == 's' && y < d->height - 1) {
+            y++;
+        } else if (d->command[i] == 'd' && x < d->width - 1) {
+            x++;
+        }
+        if (write_mode == true)
+            d->map[y][x] = '0';
+    }
+}
+
+// Success: return 0
+// Failure: return -1
+int init_map(t_data *d) {
+    d->map = alloc_map(d);
+    if (d->map == NULL) {
+        free(d->command);
+        return -1;
+    }
+    exec_command(d);
+    free(d->command);
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
-    t_data d = {0, 0, 0, NULL};
+    t_data d = {0, 0, 0, NULL, NULL};
     if (check_args(argc, argv, &d) == -1)
         return 1;
     if (get_command(&d) == -1)
         return 1;
-
+    if (init_map(&d) == -1)
+        return 1;
     //
-    ft_putstr(d.command);
-    putchar('\n');
-    free(d.command);
+    print_map(&d);
+    free_map(&d);
     //
     return 0;
 }
