@@ -22,7 +22,7 @@ pen do nothing in case of invalid command.
 
 Once end of file is reached, your program must simulate a game of life on this
  board and print the result in stdout (each cell alive will be represented by
- the character 'O' and each dead cell will be represented by a space)
+ the character '0' and each dead cell will be represented by a space)
  each cell outside of the array will be considered dead
 
 Example:
