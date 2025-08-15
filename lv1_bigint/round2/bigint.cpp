@@ -45,6 +45,18 @@ bigint& bigint::operator+=(const bigint& rhs) {
     return *this;
 }
 
+
+bigint& bigint::operator++() {
+    *this += bigint(1);
+    return *this;
+}
+
+bigint bigint::operator++(int) {
+    bigint ret(*this);
+    *this += bigint(1);
+    return ret;
+}
+
 std::string bigint::get_digit() const {
     return digit;
 }

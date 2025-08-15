@@ -12,6 +12,8 @@ class bigint {
     ~bigint();
     bigint operator+(const bigint& rhs) const;
     bigint& operator+=(const bigint& rhs);
+    bigint& operator++();
+    bigint operator++(int);
     std::string get_digit() const;
  private:
     bigint(const std::string& str);
