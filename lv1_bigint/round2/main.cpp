@@ -26,10 +26,13 @@ int	main(void)
 		std::cout << "i++ = " << i++ << std::endl;
 		std::cout << "i = " << i << std::endl;
 
-		// std::cout << "\n\n" << std::endl;
-		// std::cout << "\"((b << 10) + 42)\" = " << ((b << 10) + 42) << std::endl;
-		// std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
-		// std::cout << "(d >>= 2) = " << (d >>= 2) << std::endl;
+		std::cout << "\n\n" << std::endl;
+		std::cout << "\"((b << 10) + 42)\" = " << ((b << 10) + 42) << std::endl;
+		std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
+		std::cout << "(d >>= 2) = " << (d >>= 2) << std::endl;
+		std::cout << "(d >> 5) = " << (d >> 5) << std::endl;
+		std::cout << "(d >> 6) = " << (d >> 6) << std::endl;
+		std::cout << "(d >> 7) = " << (d >> 7) << std::endl;
 		// std::cout << "a = " << a << std::endl;
 		// std::cout << "d = " << d << std::endl;
 		// std::cout << "(d < a) = " << (d < a) << std::endl;

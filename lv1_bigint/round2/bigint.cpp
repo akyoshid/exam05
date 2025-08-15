@@ -61,6 +61,29 @@ std::string bigint::get_digit() const {
     return digit;
 }
 
+bigint bigint::operator<<(unsigned long long rhs) const {
+    bigint ret(*this);
+    ret.digit.append(rhs, '0');
+    return ret;
+}
+
+bigint& bigint::operator<<=(unsigned long long rhs) {
+    *this = *this << rhs;
+    return *this;
+}
+
+bigint bigint::operator>>(unsigned long long rhs) const {
+    size_t len = digit.length();
+    if (len <= rhs)
+        return bigint(0);
+    else
+        return bigint(digit.substr(0, len - rhs));
+}
+
+bigint& bigint::operator>>=(unsigned long long rhs) {
+    *this = *this >> rhs;
+    return *this;
+}
 
 bigint::bigint(const std::string& str) : digit(str) {
 }
