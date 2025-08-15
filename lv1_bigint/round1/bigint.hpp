@@ -2,6 +2,7 @@
 # define BIGINT_HPP_
 
 # include <string>
+# include <iostream>
 
 class bigint {
  public:
