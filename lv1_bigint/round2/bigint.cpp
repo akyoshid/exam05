@@ -85,6 +85,51 @@ bigint& bigint::operator>>=(unsigned long long rhs) {
     return *this;
 }
 
+bool bigint::operator<(const bigint& rhs) const {
+    size_t l_len = this->digit.length();
+    size_t r_len = rhs.digit.length();
+    if (l_len < r_len)
+        return true;
+    else if (l_len > r_len)
+        return false;
+    else {
+        for (size_t i = 0; i < l_len; ++i) {
+            if (this->digit[i] < rhs.digit[i])
+                return true;
+            else if (this->digit[i] > rhs.digit[i])
+                return false;
+        }
+        return false;
+    }
+}
+
+bool bigint::operator<=(const bigint& rhs) const {
+    if (*this == rhs)
+        return true;
+    else
+        return *this < rhs;
+}
+
+bool bigint::operator>(const bigint& rhs) const {
+    return !(*this <= rhs);
+}
+
+bool bigint::operator>=(const bigint& rhs) const {
+    return !(*this < rhs);
+}
+
+bool bigint::operator==(const bigint& rhs) const {
+    if (this->digit == rhs.digit)
+        return true;
+    else
+        return false;
+}
+
+bool bigint::operator!=(const bigint& rhs) const {
+    return !(*this == rhs);
+}
+
+
 bigint::bigint(const std::string& str) : digit(str) {
 }
 

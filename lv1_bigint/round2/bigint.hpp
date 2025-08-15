@@ -18,6 +18,12 @@ class bigint {
     bigint& operator<<=(unsigned long long rhs);
     bigint operator>>(unsigned long long rhs) const;
     bigint& operator>>=(unsigned long long rhs);
+    bool operator<(const bigint& rhs) const;
+    bool operator<=(const bigint& rhs) const;
+    bool operator>(const bigint& rhs) const;
+    bool operator>=(const bigint& rhs) const;
+    bool operator==(const bigint& rhs) const;
+    bool operator!=(const bigint& rhs) const;
     std::string get_digit() const;
  private:
     bigint(const std::string& str);
