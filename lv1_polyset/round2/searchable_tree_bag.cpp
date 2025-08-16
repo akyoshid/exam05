@@ -27,10 +27,10 @@ bool searchable_tree_bag::check_node(node* node, int item) {
         return false;
     else {
         if (node->value < item)
-            check_node(node->l, item);
+            return check_node(node->r, item);
         else if (node->value > item)
-            check_node(node->r, item);
+            return check_node(node->l, item);
         else
-            true;
+            return true;
     }
 }
