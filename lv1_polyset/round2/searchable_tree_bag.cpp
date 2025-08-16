@@ -11,7 +11,7 @@ searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag& src)
 
 searchable_tree_bag& searchable_tree_bag::operator=(const searchable_tree_bag& src) {
     if (this != &src)
-        *this = src;
+        tree_bag::operator=(src);
     return *this;
 }
 
